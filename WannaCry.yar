@@ -24,7 +24,8 @@ rule WannaCry_StaticBehavior_Analysis
         $api5 = "socket" ascii
 
     condition:
-        pe.is_pe and           // השתמש במודול PE במקום בדיקת ה-MZ הישנה
+        pe.is_pe and           
         3 of ($s*) and
         2 of ($api*)
 }
+
