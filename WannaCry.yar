@@ -1,3 +1,6 @@
+import "pe"
+
+
 rule WannaCry_StaticBehavior_Analysis
 
 {
@@ -23,7 +26,8 @@ rule WannaCry_StaticBehavior_Analysis
         $api5 = "socket" ascii                          // PE Studio: Network comms
 
     condition:
-        uint16(0) == 0x5A4D and                        // Ensure it's a PE file (MZ header)
+        pe.is_pe and                        // Ensure it's a PE file (MZ header)
         3 of ($s*) and                                 // At least 3 static indicators
         2 of ($api*)                                   // At least 2 behavioral indicators
 }
+
