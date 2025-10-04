@@ -1,8 +1,6 @@
 import "pe"
 
-
 rule WannaCry_StaticBehavior_Analysis
-
 {
     meta:
         description = "Detects WannaCry ransomware using static and behavioral indicators"
@@ -13,21 +11,20 @@ rule WannaCry_StaticBehavior_Analysis
 
     strings:
         // Static indicators
-        $s1 = "WannaDecryptor" wide ascii               // Figure 1: Ransomware message string
-        $s2 = "tasksche.exe" ascii                      // Host-Based Indicators: Dropped payload
-        $s3 = "iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com" ascii // Chapter 6: Kill-switch domain
-        $s4 = ".WNCRY" ascii                            // Figure 12: Encrypted file extension
+        $s1 = "WannaDecryptor" wide ascii
+        $s2 = "tasksche.exe" ascii
+        $s3 = "iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com" ascii
+        $s4 = ".WNCRY" ascii
 
         // Behavioral / API indicators
-        $api1 = "InternetOpenUrlA" ascii                // Cutter: Kill-switch logic
-        $api2 = "CreateServiceA" ascii                  // PE Studio: Persistence mechanism
-        $api3 = "recv" ascii                            // PE Studio: Network activity
-        $api4 = "send" ascii                            // PE Studio: Network propagation
-        $api5 = "socket" ascii                          // PE Studio: Network comms
+        $api1 = "InternetOpenUrlA" ascii
+        $api2 = "CreateServiceA" ascii
+        $api3 = "recv" ascii
+        $api4 = "send" ascii
+        $api5 = "socket" ascii
 
     condition:
-        pe.is_pe and                        // Ensure it's a PE file (MZ header)
-        3 of ($s*) and                                 // At least 3 static indicators
-        2 of ($api*)                                   // At least 2 behavioral indicators
+        pe.is_pe and           // השתמש במודול PE במקום בדיקת ה-MZ הישנה
+        3 of ($s*) and
+        2 of ($api*)
 }
-
