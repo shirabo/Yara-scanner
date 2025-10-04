@@ -6,7 +6,7 @@ rule WannaCry_StaticBehavior_Analysis_v3
     meta:
         description = "Detects WannaCry-like samples using strings + imports + entropy (balanced heuristics)"
         author = "Shira Borochovich"
-        date = "2025-10-05"
+        date = "2025-03-05"
         version = "3.1"
         references = "Figure 1, Figure 12, Chapter 6, Host-Based Indicators section"
 
@@ -48,3 +48,4 @@ rule WannaCry_StaticBehavior_Analysis_v3
             )
         )
 }
+
