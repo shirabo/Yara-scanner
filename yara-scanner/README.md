@@ -1,4 +1,4 @@
-# 🔍 Simple YARA Rule Scanner
+#  Simple YARA Rule Scanner
 
 A lightweight Python tool to scan files or folders using YARA rules.
 
